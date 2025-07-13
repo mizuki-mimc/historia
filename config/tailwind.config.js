@@ -14,6 +14,14 @@ module.exports = {
       },
     },
   },
+ safelist: [
+    {
+      pattern: /(bg|border)-(red|purple|pink|indigo|slate|amber|emerald|cyan)-(50|400|500)/,
+    },
+    {
+      pattern: /md:hover:border-(red|purple|pink|indigo|slate|amber|emerald|cyan)-500/,
+    }
+  ],
   plugins: [
     // require('@tailwindcss/forms'),
     // require('@tailwindcss/typography'),
