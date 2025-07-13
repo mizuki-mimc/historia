@@ -35,7 +35,6 @@ gem "jbuilder"
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 # gem "sassc-rails"
-gem "sass"
 
 gem "omniauth-google-oauth2", "~> 1.0"
 gem "omniauth-rails_csrf_protection"
