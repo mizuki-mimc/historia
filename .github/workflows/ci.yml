@@ -193,7 +193,7 @@ jobs:
           path: ${{ github.workspace }}/tmp/screenshots
           if-no-files-found: ignore
 
-deploy-staging:
+  deploy-staging:
     runs-on: ubuntu-latest
     needs: [scan_ruby, scan_js_audit, lint, test]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
@@ -201,4 +201,3 @@ deploy-staging:
     steps:
       - name: Trigger Render Staging Deploy
         run: curl -X POST ${{ secrets.RENDER_STAGING_DEPLOY_HOOK_URL }}
-        
