@@ -11,24 +11,24 @@
   <% end %>
 
   <div>
-    <%= f.label :title, "タイトル", class: "block text-lg font-bold" %>
+    <%= render 'shared/form_label', f: f, attribute: :title, text: "タイトル" %>
     <%= f.text_field :title, class: "mt-1 block w-full px-3 py-2 border border-black rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black", placeholder: "100文字以内で記入してください。" %>
   </div>
 
   <div>
-    <%= f.label :genre, "ジャンル", class: "block text-lg font-bold" %>
+    <%= render 'shared/form_label', f: f, attribute: :genre, text: "ジャンル" %>
     <%= f.select :genre, options_for_select(Story.genres.keys.map { |k| [t("activerecord.attributes.story.genres.#{k}"), k] }, f.object.genre),
-      { include_blank: "ジャンルを選択してください。" },
-      class: "mt-1 block w-full px-3 py-2 border border-black rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black" %>
+          { include_blank: "ジャンルを選択してください。" },
+          class: "mt-1 block w-full px-3 py-2 border border-black rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black" %>
   </div>
 
   <div>
-    <%= f.label :thema, "テーマ", class: "block text-lg font-bold" %>
+    <%= render 'shared/form_label', f: f, attribute: :thema, text: "テーマ" %>
     <%= f.text_field :thema, class: "mt-1 block w-full px-3 py-2 border border-black rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black", placeholder: "50文字以内でストーリーの内容を説明してください" %>
   </div>
 
   <div>
-    <%= f.label :synopsis, "あらすじ", class: "block text-lg font-bold" %>
+    <%= render 'shared/form_label', f: f, attribute: :synopsis, text: "あらすじ" %>
     <%= f.text_area :synopsis, class: "mt-1 block w-full px-3 py-2 border border-black rounded-md shadow-sm focus:outline-none focus:ring-black focus:border-black h-32", placeholder: "あらすじを記入してください。（あとから記入しても構いません）" %>
   </div>
 

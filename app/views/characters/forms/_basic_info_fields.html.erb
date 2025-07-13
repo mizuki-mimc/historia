@@ -1,24 +1,21 @@
 <div>
-  <%= f.label :category, "カテゴリー", class: "block text-lg font-bold" %>
-  <%= f.select :category, 
-               Character.categories.keys, 
-               { include_blank: 'カテゴリーを選択してください' }, 
-               { class: "mt-2 w-full p-2 border border-black rounded" } %>
+  <%= render 'shared/form_label', f: f, attribute: :category, text: "カテゴリー" %>
+  <%= f.select :category, Character.categories.keys, { include_blank: 'カテゴリーを選択してください' }, { class: "mt-2 w-full p-2 border border-black rounded" } %>
 </div>
 
 <div>
-  <%= f.label :name, "キャラクター名", class: "block text-lg font-bold" %>
+  <%= render 'shared/form_label', f: f, attribute: :name, text: "キャラクター名" %>
   <%= f.text_field :name, placeholder: "30文字以内で記入してください。", class: "mt-2 w-full p-2 border border-black rounded" %>
 </div>
 <div>
-  <%= f.label :race, "種族", class: "block text-lg font-bold" %>
+  <%= render 'shared/form_label', f: f, attribute: :race, text: "種族" %>
   <%= f.text_field :race, placeholder: "30文字以内で記入してください。", class: "mt-2 w-full p-2 border border-black rounded" %>
 </div>
 <div>
-  <%= f.label :gender, "性別", class: "block text-lg font-bold" %>
+  <%= render 'shared/form_label', f: f, attribute: :gender, text: "性別" %>
   <%= f.select :gender, Character.genders.keys.map { |k| [I18n.t("enums.character.gender.#{k}"), k] }, { prompt: "キャラクターの性別を選択してください。" }, { class: "mt-2 w-full p-2 border border-black rounded" } %>
 </div>
 <div>
-  <%= f.label :age, "年齢", class: "block text-lg font-bold" %>
+  <%= render 'shared/form_label', f: f, attribute: :age, text: "年齢" %>
   <%= f.text_field :age, placeholder: "キャラクターの年齢を記載してください。", class: "mt-2 w-full p-2 border border-black rounded" %>
 </div>

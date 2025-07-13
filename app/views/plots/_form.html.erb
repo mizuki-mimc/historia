@@ -12,17 +12,17 @@
   <% end %>
 
   <div>
-    <%= f.label :chapter, "章・話", class: "block text-lg font-bold" %>
+    <%= render 'shared/form_label', f: f, attribute: :chapter, text: "章・話" %>
     <%= f.text_field :chapter, class: "mt-1 block w-full px-3 py-2 border border-black rounded-md shadow-sm", placeholder: "第一章、プロローグ、第一話など10文字以内で記入してください。" %>
   </div>
 
   <div>
-    <%= f.label :title, "タイトル", class: "block text-lg font-bold" %>
+    <%= render 'shared/form_label', f: f, attribute: :title, text: "タイトル" %>
     <%= f.text_field :title, class: "mt-1 block w-full px-3 py-2 border border-black rounded-md shadow-sm", placeholder: "30文字以内で記入してください。" %>
   </div>
 
   <div>
-    <%= f.label :summary, "要約", class: "block text-lg font-bold" %>
+    <%= render 'shared/form_label', f: f, attribute: :summary, text: "要約" %>
     <%= f.text_field :summary, class: "mt-1 block w-full px-3 py-2 border border-black rounded-md shadow-sm", placeholder: "30文字以内で記入してください。" %>
   </div>
   

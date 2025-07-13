@@ -1,17 +1,17 @@
 <div>
-  <%= f.label :category, "カテゴリ", class: "block text-lg font-bold" %>
+  <%= render 'shared/form_label', f: f, attribute: :category, text: "カテゴリ" %>
   <%= f.select :category, WorldGuide.categories.keys.map { |k| [WorldGuide.categories[k], k] }, { prompt: "カテゴリを選択してください" }, class: "mt-2 block w-full px-3 py-2 border border-black rounded-md" %>
 </div>
 
 <div>
-  <%= f.label :world_name, "世界名", class: "block text-lg font-bold" %>
+  <%= render 'shared/form_label', f: f, attribute: :world_name, text: "世界名" %>
   <%= f.text_field :world_name, class: "mt-2 block w-full px-3 py-2 border border-black rounded-md", placeholder: "20文字以内で記入してください。（ 例：地球 ）" %>
 </div>
 <div>
-  <%= f.label :country_name, "国名", class: "block text-lg font-bold" %>
+  <%= render 'shared/form_label', f: f, attribute: :country_name, text: "国名" %>
   <%= f.text_field :country_name, class: "mt-2 block w-full px-3 py-2 border border-black rounded-md", placeholder: "20文字以内で記入してください。（ 例：日本 ）" %>
 </div>
 <div>
-  <%= f.label :region_name, "地域名", class: "block text-lg font-bold" %>
+  <%= render 'shared/form_label', f: f, attribute: :region_name, text: "地域名" %>
   <%= f.text_field :region_name, class: "mt-2 block w-full px-3 py-2 border border-black rounded-md", placeholder: "20文字以内で記入してください。（ 例：東京 ）" %>
 </div>
