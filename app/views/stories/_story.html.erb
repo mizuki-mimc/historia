@@ -1,7 +1,27 @@
-<div class="border-2 rounded-lg flex flex-col h-full md:hover:border-black md:hover:shadow-lg transition-all duration-200 border-black">
-  <div class="flex justify-between items-center text-xs p-2 border-b border-black">
+<%
+  card_base_classes = "border-2 rounded-lg flex flex-col h-full md:hover:shadow-lg transition-all duration-200 overflow-hidden"
+  header_base_classes = "flex justify-between items-center text-xs p-2 border-b rounded-t-lg"
+  body_classes = "flex-grow block relative bg-white rounded-b-lg"
+
+  if story.published?
+    color = genre_color_name(story.genre)
+    card_classes = "#{card_base_classes} border-#{color}-400 md:hover:border-#{color}-500"
+    header_classes = "#{header_base_classes} border-#{color}-400 bg-#{color}-50"
+  else
+    card_classes = "#{card_base_classes} border-black md:hover:border-black"
+    header_classes = "#{header_base_classes} border-black"
+  end
+%>
+
+<div class="<%= card_classes %>">
+  <div class="<%= header_classes %>">
     <div class="font-semibold text-gray-600 flex items-center">
-      <span><%= t("activerecord.attributes.story.statuses.#{story.status}") %></span>
+      <% if story.published? %>
+        <span class="px-2 py-0.5 rounded-full text-white text-xs bg-<%= genre_color_name(story.genre) %>-500"><%= t("activerecord.attributes.story.statuses.#{story.status}") %></span>
+      <% else %>
+        <span><%= t("activerecord.attributes.story.statuses.#{story.status}") %></span>
+      <% end %>
+
       <span class="mx-1">/</span>
       <span><%= t("activerecord.attributes.story.genres.#{story.genre}") %></span>
     </div>
@@ -20,7 +40,7 @@
     </div>
   </div>
 
-  <%= link_to story_path(story), class: "flex-grow block relative" do %>
+  <%= link_to story_path(story), class: body_classes do %>
     <div class="p-4 pb-16">
       <div class="mb-3">
         <p class="font-bold text-black">【 タイトル 】</p>
