@@ -11,12 +11,12 @@
   <% end %>
 
   <div>
-    <%= f.label :title, "フラグタイトル", class: "block text-lg font-bold" %>
+    <%= render 'shared/form_label', f: f, attribute: :title, text: "フラグタイトル" %>
     <%= f.text_field :title, class: "mt-1 block w-full px-3 py-2 border border-black rounded-md shadow-sm", placeholder: "30文字以内で記入してください。" %>
   </div>
 
   <div>
-    <%= f.label :content, "フラグ内容", class: "block text-lg font-bold" %>
+    <%= render 'shared/form_label', f: f, attribute: :content, text: "フラグ内容" %>
     <%= f.text_area :content, rows: 5, class: "mt-1 block w-full px-3 py-2 border border-black rounded-md shadow-sm", placeholder: "フラグの内容を記載してください。" %>
   </div>
 
