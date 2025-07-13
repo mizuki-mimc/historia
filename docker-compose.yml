@@ -10,7 +10,7 @@ services:
   web:
     build:
       context: .
-      target: production # 本番/開発用はproductionステージを使う
+      target: production
     command: bin/dev
     volumes:
       - .:/app
@@ -30,12 +30,13 @@ services:
     build:
       context: .
       target: base
+    shm_size: '2gb'
     volumes:
       - .:/app
     depends_on:
       - db
     environment:
-      RAILS_ENV: test # テスト環境を指定
+      RAILS_ENV: test
       DATABASE_URL: postgres://postgres:password@db:5432/historia_test
     env_file:
       - .env
