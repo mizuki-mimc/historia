@@ -286,6 +286,7 @@ Nolaさんは私も使用しており、非常に詳細な管理、項目の可�
 https://www.figma.com/design/Bsqfd6ElrLcRTSR7h7lltT/Historia?node-id=113-42&t=oFVxdjpxMcLoQG1c-1
 
 ## 💻 ER図
-![Historia_ER図 drawio](https://github.com/user-attachments/assets/e8bb01a2-db07-4ff8-8c91-640479945e53)
+![Historia_ER図](https://github.com/user-attachments/assets/f943b231-fb51-4622-8f16-0e16cc26fae3)
+
 
 
