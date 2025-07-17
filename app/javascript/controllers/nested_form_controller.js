@@ -187,8 +187,8 @@ export default class extends Controller {
     if (!this.hasModalPlaceholderTarget) return;
     this.hideConfirmationModal()
     const modalHTML = `
-      <div class="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity" data-action="click->nested-form#hideConfirmationModal"></div>
-      <div class="fixed inset-0 z-10 w-screen overflow-y-auto">
+      <div class="fixed inset-0 z-[1050] bg-gray-900 bg-opacity-50 transition-opacity" data-action="click->nested-form#hideConfirmationModal"></div>
+      <div class="fixed inset-0  z-[1060] w-screen overflow-y-auto">
         <div class="flex min-h-full items-center justify-center p-4 text-center">
           <div class="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
             <div class="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">

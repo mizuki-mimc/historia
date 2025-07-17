@@ -1,4 +1,4 @@
-<%= form_with model: [story, character], local: true, class: "space-y-8" do |f| %>
+<%= form_with model: [story, character], multipart: true, local: true, class: "space-y-8" do |f| %>
   <%= render 'characters/forms/error_messages', character: character %>
 
   <% if character.errors.any? %>
@@ -17,7 +17,7 @@
 
   <%= render 'characters/forms/features_fields', f: f, feature_categories: @feature_categories %>
 
-  <%= render 'characters/forms/image_upload_section' %>
+  <%= render 'characters/forms/image_upload_section', f: f %>
 
   <%= render 'characters/forms/submit_button', f: f, character: character %>
 <% end %>

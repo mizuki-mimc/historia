@@ -3,6 +3,8 @@ class Character < ApplicationRecord
   belongs_to :birthplace_world_guide, class_name: "WorldGuide", optional: true
   belongs_to :address_world_guide, class_name: "WorldGuide", optional: true
 
+  has_one_attached :image
+
   has_many :character_features, dependent: :destroy
   has_many :character_feature_categories, through: :character_features
   accepts_nested_attributes_for :character_features, allow_destroy: true, reject_if: :all_blank

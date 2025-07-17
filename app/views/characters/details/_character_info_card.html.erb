@@ -51,6 +51,14 @@
 
     <div>
       <p class="font-bold">【イメージ画像】</p>
-     <p class="text-xl ml-4 mt-2">なし</p>
+      <% if character.image.attached? %>
+        <div class="ml-4 mt-4">
+          <a href="#" data-action="click->image-viewer#open" data-image-viewer-src-param="<%= url_for(character.image) %>">
+            <%= image_tag character.image, class: "w-48 h-48 object-cover rounded-lg shadow-md cursor-pointer" %>
+          </a>
+        </div>
+      <% else %>
+        <p class="ml-4 mt-2">なし</p>
+      <% end %>
     </div>
 </div>

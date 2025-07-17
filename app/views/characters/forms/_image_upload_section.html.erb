@@ -1,7 +1,33 @@
-<div>
+<div data-controller="image-preview">
   <p class="block text-lg font-bold">イメージ画像</p>
-  <div class="flex gap-4 mt-3">
-    <button type="button" disabled class="w-1/2 py-2 border border-gray-400 rounded-md bg-gray-100 text-gray-500">ファイルから画像を追加</button>
-    <button type="button" disabled class="w-1/2 py-2 border border-gray-400 rounded-md bg-gray-100 text-gray-500">イメージ画像を見つける</button>
+  <div class="flex gap-4 mt-3 mb-10">
+    <%= f.label :image, "ファイルから画像を追加", class: "w-1/2 py-2 text-center border border-gray-400 rounded-md cursor-pointer font-semibold hover:bg-black hover:text-white transition-colors" %>
+    <%= f.file_field :image, class: "hidden", data: { image_preview_target: "input", action: "change->image-preview#preview" } %>
+    
+    <button type="button" disabled class="w-1/2 py-2 border border-gray-400 rounded-md bg-gray-100 font-semibold text-gray-500">イメージ画像を見つける</button>
+  </div>
+
+  <div class="mt-4">
+    <%= f.hidden_field :remove_image, value: '0', data: { image_preview_target: 'removeInput' } %>
+
+    <div data-image-preview-target="existingImageWrapper" class="<%= 'hidden' if !(f.object.persisted? && f.object.image.attached?) %>">
+      <% if f.object.persisted? && f.object.image.attached? %>
+        <div class="relative w-32 h-32">
+          <%= image_tag f.object.image, class: "w-32 h-32 object-cover rounded-lg" %>
+          <button type="button"
+                  class="absolute -top-2 -right-2 bg-gray-700 text-white rounded-full h-6 w-6 flex items-center justify-center text-xs font-bold hover:bg-red-600 transition-colors"
+                  data-action="click->modal#open"
+                  data-modal-title="イメージ画像の削除"
+                  data-modal-body="イメージ画像を削除します。本当によろしいですか？"
+                  data-modal-button-text="削除する"
+                  data-modal-confirm-event-name-param="remove-image">
+            ×
+          </button>
+        </div>
+      <% end %>
+    </div>
+
+    <div data-image-preview-target="previewContainer">
+    </div>
   </div>
 </div>
