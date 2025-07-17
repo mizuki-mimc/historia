@@ -1,4 +1,8 @@
-<div data-controller="nested-form" data-form-type="worldGuideFeatures" data-nested-form-modal-title-value="特徴の削除" data-nested-form-modal-message-value="この特徴を削除しますか？">
+<div data-controller="nested-form" 
+     data-form-type="worldGuideFeatures" 
+     data-nested-form-modal-title-value="特徴の削除" 
+     data-nested-form-modal-message-value="この特徴を削除しますか？">
+  
   <p class="block text-lg font-bold mb-2">特徴</p>
 
   <div class="border rounded-lg p-4 mb-2 space-y-2">
@@ -17,28 +21,34 @@
   <div class="flex flex-wrap gap-2">
     <%= f.fields_for :world_guide_features do |feature_form| %>
       <% unless feature_form.object.new_record? %>
-        <div class="nested-fields-wrapper inline-flex items-center gap-2 px-3 py-1 text-md bg-gray-100 border border-black rounded-full cursor-pointer" data-action="click->nested-form#remove">
-          <span><%= feature_form.object.world_feature_category.name %> / <%= feature_form.object.explanation %></span>
-          <span class="text-xs text-red-500 font-bold">×</span>
+        <%# 削除マークが付いている場合 %>
+        <% if feature_form.object.marked_for_destruction? %>
           <%= feature_form.hidden_field :id %>
           <%= feature_form.hidden_field :_destroy %>
-        </div>
+        <% else %>
+          <div class="nested-fields-wrapper inline-flex items-center gap-2 px-3 py-1 text-md bg-gray-100 border border-black rounded-full cursor-pointer" data-action="click->nested-form#remove">
+            <span><%= feature_form.object.world_feature_category.name %> / <%= feature_form.object.explanation %></span>
+            <span class="text-xs text-red-500 font-bold">×</span>
+            <%= feature_form.hidden_field :id %>
+            <%= feature_form.hidden_field :_destroy %>
+          </div>
+        <% end %>
       <% end %>
     <% end %>
-
     <div data-nested-form-target="container" class="contents"></div>
   </div>
 
   <template data-nested-form-target="template">
-    <div class="nested-fields-wrapper inline-flex items-center gap-2 px-3 py-1 text-semimd bg-gray-100 border border-black rounded-full cursor-pointer" data-action="click->nested-form#remove" data-new-record="true">
+    <div class="nested-fields-wrapper inline-flex items-center gap-2 px-3 py-1 text-md bg-gray-100 border border-black rounded-full cursor-pointer" data-action="click->nested-form#remove" data-new-record="true">
       <span data-nested-form-target="capsuleText"></span>
       <span class="text-xs text-red-500 font-bold">×</span>
       <%= f.fields_for :world_guide_features, WorldGuideFeature.new, child_index: 'NEW_RECORD' do |ff| %>
         <%= ff.hidden_field :world_feature_category_id, data: { nested_form_target: "hiddenCategoryId" } %>
         <%= ff.hidden_field :explanation, data: { nested_form_target: "hiddenExplanation" } %>
-        <%= ff.hidden_field :_destroy %>
+        <%= ff.hidden_field :_destroy, value: 'false' %>
       <% end %>
     </div>
   </template>
+
   <div data-nested-form-target="modalPlaceholder"></div>
 </div>

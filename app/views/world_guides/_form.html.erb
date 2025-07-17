@@ -3,7 +3,7 @@
   <% if @validation_error %>
     <div id="form-validation-error-trigger" 
          class="hidden"
-         data-world-guide-features="<%= world_guide.world_guide_features.to_json(only: [:id, :world_feature_category_id, :explanation]) %>">
+         data-world-guide-features="<%= @world_guide_features_data || '[]' %>">
     </div>
   <% end %>
 
@@ -19,6 +19,7 @@
   <% end %>
 
   <%= render 'world_guides/basic_fields', f: f %>
+
   <%= render 'world_guides/feature_fields', f: f %>
 
   <div>
@@ -28,7 +29,7 @@
       <button type="button" disabled class="w-1/2 py-2 border border-gray-400 rounded-md bg-gray-100 text-gray-500">イメージ画像を見つける</button>
     </div>
   </div>
-  
+
   <div class="text-center pt-4">
     <% submit_text = world_guide.new_record? ? "ワールドガイドを作成する" : "ワールドガイドを更新する" %>
     <%= f.submit submit_text, class: "border border-gray-400 px-4 py-3 rounded-md font-semibold hover:bg-black hover:text-white transition-colors duration-300" %>

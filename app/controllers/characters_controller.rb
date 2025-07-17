@@ -19,7 +19,7 @@ class CharactersController < ApplicationController
   end
 
   def create
-    @character = @story.characters.build(character_params)
+    @character = @story.characters.build(character_params.except(:remove_image))
     if @character.save
       redirect_to story_characters_path(@story), success: "キャラクターを追加しました。"
     else
@@ -33,7 +33,10 @@ class CharactersController < ApplicationController
   end
 
   def update
-    if @character.update(character_params)
+    permitted_params = character_params
+    @character.image.purge if permitted_params[:remove_image] == "1"
+
+    if @character.update(permitted_params.except(:remove_image))
       redirect_to story_character_path(@story, @character), success: "キャラクターを更新しました。"
     else
       flash.now[:error] = "キャラクターの更新に失敗しました。"
@@ -70,7 +73,7 @@ class CharactersController < ApplicationController
   def character_params
     params.require(:character).permit(
       :name, :race, :gender, :age, :category,
-      :birthplace_world_guide_id, :address_world_guide_id,
+      :birthplace_world_guide_id, :address_world_guide_id, :image, :remove_image,
       character_features_attributes: [ :id, :character_feature_category_id, :explanation, :_destroy ],
       relationships_attributes: [ :id, :related_character_id, :relationship_type, :_destroy ]
     )
