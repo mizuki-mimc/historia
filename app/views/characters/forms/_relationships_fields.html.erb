@@ -17,7 +17,9 @@
   <div class="flex flex-wrap gap-2">
     <%= f.fields_for :relationships do |relation_form| %>
       <% unless relation_form.object.new_record? %>
-        <div class="nested-fields-wrapper inline-flex items-center gap-2 px-3 py-1 text-md bg-gray-100 border border-black rounded-full cursor-pointer" data-action="click->nested-form#remove">
+        <div class="nested-fields-wrapper inline-flex items-center gap-2 px-3 py-1 text-md bg-gray-100 border border-black rounded-full cursor-pointer" 
+             data-action="click->nested-form#remove"
+             <%= 'style="display: none;"'.html_safe if relation_form.object.marked_for_destruction? %>>
           <span><%= relation_form.object.related_character.name %> / <%= relation_form.object.relationship_type %></span>
           <span class="text-xs text-red-500 font-bold">×</span>
           <%= relation_form.hidden_field :id %>

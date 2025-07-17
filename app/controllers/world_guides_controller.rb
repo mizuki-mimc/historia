@@ -15,7 +15,6 @@ class WorldGuidesController < ApplicationController
 
   def new
     @world_guide = @story.world_guides.build(category: params.dig(:world_guide, :category))
-    @world_guide.world_guide_features.build
   end
 
   def edit
@@ -28,6 +27,10 @@ class WorldGuidesController < ApplicationController
     else
       flash.now[:error] = "ワールドガイドの作成に失敗しました。"
       @validation_error = true
+      @world_guide_features_data = params.require(:world_guide)
+                                         .fetch(:world_guide_features_attributes, {})
+                                         .values.to_json
+
       render :new, status: :unprocessable_entity
     end
   end
@@ -38,6 +41,10 @@ class WorldGuidesController < ApplicationController
     else
       flash.now[:error] = "ワールドガイドの更新に失敗しました。"
       @validation_error = true
+      @world_guide_features_data = params.require(:world_guide)
+                                         .fetch(:world_guide_features_attributes, {})
+                                         .values.to_json
+
       render :edit, status: :unprocessable_entity
     end
   end
