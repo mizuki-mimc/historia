@@ -21,7 +21,8 @@ class WorldGuidesController < ApplicationController
   end
 
   def create
-    @world_guide = @story.world_guides.build(world_guide_params)
+    @world_guide = @story.world_guides.build(world_guide_params.except(:remove_image))
+
     if @world_guide.save
       redirect_to story_world_guides_path(@story), success: "ワールドガイドを追加しました。"
     else
@@ -30,13 +31,16 @@ class WorldGuidesController < ApplicationController
       @world_guide_features_data = params.require(:world_guide)
                                          .fetch(:world_guide_features_attributes, {})
                                          .values.to_json
-
       render :new, status: :unprocessable_entity
     end
   end
 
   def update
-    if @world_guide.update(world_guide_params)
+    if params.dig(:world_guide, :remove_image) == "1"
+      @world_guide.image.purge
+    end
+
+    if @world_guide.update(world_guide_params.except(:remove_image))
       redirect_to story_world_guide_path(@story, @world_guide), success: "ワールドガイドを更新しました。"
     else
       flash.now[:error] = "ワールドガイドの更新に失敗しました。"
@@ -44,7 +48,6 @@ class WorldGuidesController < ApplicationController
       @world_guide_features_data = params.require(:world_guide)
                                          .fetch(:world_guide_features_attributes, {})
                                          .values.to_json
-
       render :edit, status: :unprocessable_entity
     end
   end
@@ -74,7 +77,7 @@ class WorldGuidesController < ApplicationController
 
   def world_guide_params
     params.require(:world_guide).permit(
-      :category, :world_name, :country_name, :region_name,
+      :category, :world_name, :country_name, :region_name, :image, :remove_image,
       world_guide_features_attributes: [ :id, :world_feature_category_id, :explanation, :_destroy ]
     )
   end

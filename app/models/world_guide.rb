@@ -8,6 +8,8 @@ class WorldGuide < ApplicationRecord
   has_many :address_characters, class_name: "Character", foreign_key: "address_world_guide_id", dependent: :nullify
   accepts_nested_attributes_for :world_guide_features, allow_destroy: true, reject_if: :all_blank
 
+  has_one_attached :image
+
   enum category: {
     "現在" => "現在",
     "未来" => "未来",

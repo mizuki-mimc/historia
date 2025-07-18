@@ -9,11 +9,6 @@
 
   <div class="mt-4">
     <%= f.hidden_field :remove_image, value: '0', data: { image_preview_target: 'removeInput' } %>
-
-    <%# 
-      `f.object.image.persisted?` のチェックを追加することで、
-      バリデーションエラーで戻ってきた際に、未保存の画像を表示しようとしてエラーになるのを防ぎます。
-    %>
     <div data-image-preview-target="existingImageWrapper" class="<%= 'hidden' if !(f.object.persisted? && f.object.image.attached? && f.object.image.persisted?) %>">
       <% if f.object.persisted? && f.object.image.attached? && f.object.image.persisted? %>
         <div class="relative w-32 h-32 z-0">
@@ -32,10 +27,6 @@
     </div>
 
     <div data-image-preview-target="previewContainer">
-      <%# 
-        バリデーションエラーで戻ってきた場合、選択した画像はクリアされますが、
-        これによりエラーは発生しなくなります。
-      %>
     </div>
   </div>
 </div>
