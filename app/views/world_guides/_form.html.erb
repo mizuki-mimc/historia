@@ -23,12 +23,16 @@
 
   <div data-controller="image-preview">
     <p class="block text-lg font-bold">イメージ画像</p>
+
     <div class="flex gap-4 mt-3 mb-10">
-      <%# スタイル付きのラベルをクリックすると、非表示のファイルフィールドが開く %>
-      <%= f.label :image, "ファイルから画像を追加", class: "w-1/2 py-2 text-center border border-gray-400 rounded-md cursor-pointer font-semibold hover:bg-black hover:text-white transition-colors" %>
-      <%= f.file_field :image, class: "hidden", data: { image_preview_target: "input", action: "change->image-preview#preview" } %>
-      
-      <button type="button" disabled class="w-1/2 py-2 border border-gray-400 rounded-md bg-gray-100 font-semibold text-gray-500">イメージ画像を見つける</button>
+      <div class="w-1/2">
+        <%= f.label :image, "ファイルから画像を追加", class: "w-full py-2 text-center border border-gray-400 rounded-md cursor-pointer font-semibold hover:bg-black hover:text-white transition-colors block" %>
+        <%= f.file_field :image, class: "hidden", data: { image_preview_target: "input", action: "change->image-preview#preview" } %>
+      </div>
+
+      <div class="w-1/2">
+        <button type="button" disabled class="w-full py-2 border border-gray-400 rounded-md bg-gray-100 font-semibold text-gray-500">イメージ画像を見つける</button>
+      </div>
     </div>
 
     <div class="mt-4">

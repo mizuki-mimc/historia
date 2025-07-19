@@ -9,6 +9,10 @@ class WorldGuide < ApplicationRecord
   accepts_nested_attributes_for :world_guide_features, allow_destroy: true, reject_if: :all_blank
 
   has_one_attached :image
+  validates :image, content_type: { in: [ "image/jpeg", "image/png" ], message: "のファイル形式はJPEGまたはPNGにしてください" },
+                    size: { less_than: 5.megabytes, message: "のファイルサイズは5MB以下にしてください" }
+
+  after_save :process_image_variants, if: -> { image.attached? && image.changed? }
 
   enum category: {
     "現在" => "現在",
@@ -28,4 +32,12 @@ class WorldGuide < ApplicationRecord
   validates :world_name, length: { maximum: 20 }
   validates :country_name, presence: true, length: { maximum: 20 }
   validates :region_name, presence: true, length: { maximum: 20 }
+
+  private
+
+  def process_image_variants
+    image.variant(resize_to_limit: [ 1200, 1200 ]).processed
+    image.variant(resize_to_limit: [ 800, 800 ]).processed
+    image.variant(resize_to_fill: [ 128, 128 ]).processed
+  end
 end

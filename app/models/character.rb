@@ -4,6 +4,10 @@ class Character < ApplicationRecord
   belongs_to :address_world_guide, class_name: "WorldGuide", optional: true
 
   has_one_attached :image
+  validates :image, content_type: { in: [ "image/jpeg", "image/png" ], message: "のファイル形式はJPEGまたはPNGにしてください" },
+                    size: { less_than: 5.megabytes, message: "のファイルサイズは5MB以下にしてください" }
+
+  after_save :process_image_variants, if: -> { image.attached? && image.changed? }
 
   has_many :character_features, dependent: :destroy
   has_many :character_feature_categories, through: :character_features
@@ -36,4 +40,12 @@ class Character < ApplicationRecord
   validates :name, presence: true, length: { maximum: 30 }
   validates :race, length: { maximum: 30 }
   validates :age, length: { maximum: 20 }
+
+  private
+
+  def process_image_variants
+    image.variant(resize_to_limit: [ 1200, 1200 ]).processed
+    image.variant(resize_to_limit: [ 800, 800 ]).processed
+    image.variant(resize_to_fill: [ 128, 128 ]).processed
+  end
 end

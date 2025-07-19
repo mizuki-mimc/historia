@@ -31,6 +31,7 @@ ja:
         world_name: "「 世界名 」"
         country_name: "「 国名 」"
         region_name: "「 地域名 」"
+        image: "イメージ画像"
       character:
         name: "名前"
         race: "種族"
@@ -39,6 +40,7 @@ ja:
         category: "カテゴリ"
         birthplace_world_guide_id: "出身地"
         address_world_guide_id: "現住所"
+        image: "イメージ画像"
 
   activemodel:
     attributes:
@@ -48,6 +50,18 @@ ja:
         category: "お問い合わせ種別"
         content: "お問い合わせ内容"
   
+  active_storage_validations:
+    messages:
+      content_type_invalid: "のファイル形式は不正です"
+      file_size_out_of_range: "のファイルサイズは%{min}から%{max}の間にしてください"
+      limit_out_of_range: "のファイル数は%{min}から%{max}の間にしてください"
+      image_size_out_of_range: "の画像サイズは%{min_width}x%{min_height}pxから%{max_width}x%{max_height}pxの間にしてください"
+      image_aspect_ratio_not_square: "は正方形にしてください"
+      image_aspect_ratio_not_portrait: "は縦長にしてください"
+      image_aspect_ratio_not_landscape: "は横長にしてください"
+      image_aspect_ratio_is_not: "のアスペクト比は%{aspect_ratio}にしてください"
+      image_aspect_ratio_in_range: "のアスペクト比は%{min_aspect_ratio}から%{max_aspect_ratio}の間にしてください"
+
   errors:
     format: "%{attribute}%{message}"
     messages:

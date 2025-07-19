@@ -1,26 +1,31 @@
-<div>
-  <div data-image-viewer-target="container" class="hidden">
-    <div class="fixed inset-0 bg-black bg-opacity-30 z-50" data-action="click->image-viewer#close"></div>
-    <div class="fixed inset-0 flex items-center justify-center z-50 p-4 pointer-events-none">
-      
-<!-- モーダルカード（Stimulusのターゲットとして設定） -->
-      <div data-image-viewer-target="card" class="bg-white rounded-lg shadow-xl w-full max-w-4xl max-h-[90vh] flex flex-col pointer-events-auto" 
-           data-action="click->image-viewer#preventClose">
+<div data-image-viewer-target="container" class="hidden">
 
-<!-- モーダルヘッダー（ドラッグハンドルとして設定） -->
-        <div data-image-viewer-target="handle" class="flex justify-between items-center p-4 border-b cursor-grab" data-action="mousedown->image-viewer#startDrag">
-          <h3 class="text-lg font-semibold">イメージ画像</h3>
-          <button data-action="click->image-viewer#close" class="text-gray-500 hover:text-gray-800 text-2xl leading-none cursor-pointer">&times;</button>
-        </div>
+  <%# モーダルの背景（オーバーレイ） %>
+  <div class="fixed inset-0 bg-black bg-opacity-75 z-50" data-action="click->image-viewer#close"></div>
 
-<!-- モーダルボディ（画像を表示する） -->
-        <div class="p-4 overflow-hidden flex-grow flex items-center justify-center">
-          <img src="" 
-               data-image-viewer-target="image" 
-               class="max-w-full max-h-full object-contain">
-        </div>
+  <%# モーダルウィンドウの位置決め用ラッパー %>
+  <div class="fixed inset-0 flex items-center justify-center z-50 p-4 pointer-events-none">
+    
+    <%# モーダルカード本体 %>
+    <div data-image-viewer-target="card" 
+         class="bg-white rounded-lg shadow-xl flex flex-col max-h-[90vh] pointer-events-auto" 
+         data-action="click->image-viewer#preventClose">
 
+      <%# モーダルヘッダー（ドラッグハンドル） %>
+      <div data-image-viewer-target="handle" 
+           class="flex-shrink-0 flex justify-between items-center p-4 border-b cursor-grab" 
+           data-action="mousedown->image-viewer#startDrag">
+        <h3 class="text-lg font-semibold">イメージ画像</h3>
+        <button data-action="click->image-viewer#close" class="text-gray-500 hover:text-gray-800 text-2xl leading-none cursor-pointer">&times;</button>
       </div>
+
+      <%# モーダルボディ（画像） %>
+      <div class="p-4 overflow-auto flex-grow flex items-center justify-center">
+        <img src="" 
+             data-image-viewer-target="image" 
+             class="object-contain max-w-[90vw] max-h-[calc(90vh-100px)]">
+      </div>
+
     </div>
   </div>
 </div>
