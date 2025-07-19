@@ -31,13 +31,15 @@
 
   <div>
     <p class="font-bold">【イメージ画像】</p>
-    <div class="ml-4 mt-2">
+    <div class="mt-2">
       <% if @world_guide.image.attached? %>
-        <a href="#" data-action="click->image-viewer#open" data-image-viewer-src-param="<%= url_for(@world_guide.image) %>">
-          <%= image_tag @world_guide.image, class: "max-w-md w-full h-auto rounded-lg shadow-md cursor-pointer hover:opacity-80 transition-opacity" %>
+        <a href="#" 
+           data-action="click->image-viewer#open" 
+           data-image-viewer-src-param="<%= url_for(@world_guide.image.variant(resize_to_limit: [1200, 1200])) %>">
+          <%= image_tag @world_guide.image.variant(resize_to_limit: [800, 800]), class: "w-full h-auto rounded-lg shadow-md cursor-pointer hover:opacity-80 transition-opacity" %>
         </a>
       <% else %>
-        <p class="text-xl">なし</p>
+        <p class="text-xl ml-4 mt-2">なし</p>
       <% end %>
     </div>
   </div>

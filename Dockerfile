@@ -11,6 +11,7 @@ RUN apt-get update -qq && \
         gnupg \
         chromium \
         chromium-driver \
+        libvips-dev \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
@@ -29,6 +30,7 @@ RUN apt-get update -qq && \
         ca-certificates \
         curl \
         gnupg \
+        libvips-dev \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
