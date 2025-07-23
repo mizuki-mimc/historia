@@ -1,4 +1,3 @@
-# This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
@@ -7,7 +6,12 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 # Uncomment the line below in case you have `--require rails_helper` in the `.rspec` file
 # that will avoid rails generators crashing because migrations haven't been run yet
 # return unless Rails.env.test?
+
 require 'rspec/rails'
+require 'capybara/rspec'
+require 'selenium/webdriver'
+require 'devise'
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -43,9 +47,23 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+  config.use_transactional_fixtures = false
 
   config.include FactoryBot::Syntax::Methods
+
+  config.include Devise::Test::IntegrationHelpers, type: :system
+
+  config.include Rails.application.routes.url_helpers
+
+  config.before(:each, type: :system) do
+    driven_by :selenium_chrome_headless
+
+    if ENV['RAILS_ENV'] == 'test' && ENV['DOCKER_COMPOSE'] == 'true'
+      Capybara.server_host = '0.0.0.0'
+      Capybara.server_port = 3001
+      Capybara.app_host = "http://127.0.0.1:#{Capybara.server_port}"
+    end
+  end
 
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
@@ -53,9 +71,9 @@ RSpec.configure do |config|
   # RSpec Rails uses metadata to mix in different behaviours to your tests,
   # for example enabling you to call `get` and `post` in request specs. e.g.:
   #
-  #     RSpec.describe UsersController, type: :request do
-  #       # ...
-  #     end
+  #       RSpec.describe UsersController, type: :request do
+  #         # ...
+  #       end
   #
   # The different available types are documented in the features, such as in
   # https://rspec.info/features/8-0/rspec-rails

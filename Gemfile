@@ -38,6 +38,7 @@ gem "jbuilder"
 
 gem "omniauth-google-oauth2", "~> 1.0"
 gem "omniauth-rails_csrf_protection"
+gem "devise"
 
 gem "dotenv-rails", groups: [ :development, :test ]
 
@@ -70,6 +71,7 @@ group :development, :test do
   gem "rspec-rails"
   gem "factory_bot_rails"
   gem "faker"
+  gem "database_cleaner-active_record"
 end
 
 group :development do
