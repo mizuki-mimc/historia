@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_07_16_054830) do
+ActiveRecord::Schema[7.2].define(version: 2025_07_23_062355) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -115,6 +115,14 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_16_054830) do
     t.index ["flag_id"], name: "index_plot_flags_on_flag_id"
     t.index ["plot_id", "flag_id"], name: "index_plot_flags_on_plot_id_and_flag_id", unique: true
     t.index ["plot_id"], name: "index_plot_flags_on_plot_id"
+  end
+
+  create_table "plot_templates", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "plot_world_guides", force: :cascade do |t|
