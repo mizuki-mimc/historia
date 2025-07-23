@@ -1,0 +1,2 @@
+class PlotTemplate < ApplicationRecord
+end

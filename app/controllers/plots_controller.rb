@@ -50,6 +50,7 @@ class PlotsController < ApplicationController
     @world_guides = @story.world_guides.order(:created_at)
     @characters = @story.characters.order(:created_at)
     @flags_for_select = @story.flags.unrecovered.order(:created_at)
+    @plot_templates = PlotTemplate.order(:id)
   end
 
   def plot_params

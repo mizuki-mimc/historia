@@ -27,17 +27,29 @@
   </div>
   
   <%= render partial: 'plots/form_parts/world_guide_selector', locals: { f: f, plot: plot } %>
-
   <%= render partial: 'plots/form_parts/character_selector', locals: { f: f, plot: plot } %>
-
   <%= render partial: 'plots/form_parts/flag_selector', locals: { f: f, plot: plot } %>
 
-  <div>
+  <div data-controller="plot-template" data-plot-template-templates-value="<%= @plot_templates.to_json(only: [:id, :body]) %>">
     <%= f.label :content, "構成メモ", class: "block text-lg font-bold" %>
-    <select disabled class="mt-1 block w-full px-3 py-2 border border-black rounded-md shadow-sm bg-gray-100 text-gray-500 mb-2">
-      <option>テンプレート機能は本リリース時実装予定です。</option>
-    </select>
-    <%= f.text_area :content, class: "mt-1 block w-full px-3 py-2 border border-black rounded-md shadow-sm h-48", placeholder: "登録した要素を基に本編のメモ書きとしてご利用ください。" %>
+    
+    <div class="flex items-center gap-2 mt-1 mb-2">
+      <%= select_tag :plot_template, 
+                     options_from_collection_for_select(@plot_templates, :id, :name), 
+                     prompt: "テンプレートを選択...", 
+                     class: "block w-full px-3 py-2 border border-black rounded-md shadow-sm",
+                     data: { plot_template_target: "select" } %>
+      <button type="button" 
+              data-action="click->plot-template#insert"
+              class="py-2 px-4 border border-gray-400 rounded-md font-semibold hover:bg-black hover:text-white transition-colors duration-300 whitespace-nowrap">
+        末尾に挿入
+      </button>
+    </div>
+
+    <%= f.text_area :content, 
+                    class: "block w-full px-3 py-2 border border-black rounded-md shadow-sm h-48", 
+                    placeholder: "登録した要素を基に本編のメモ書きとしてご利用ください。",
+                    data: { plot_template_target: "textarea" } %>
   </div>
 
   <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
