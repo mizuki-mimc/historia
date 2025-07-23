@@ -8,11 +8,12 @@ class WorldGuide < ApplicationRecord
   has_many :address_characters, class_name: "Character", foreign_key: "address_world_guide_id", dependent: :nullify
   accepts_nested_attributes_for :world_guide_features, allow_destroy: true, reject_if: :all_blank
 
-  has_one_attached :image
+  has_one_attached :image, dependent: :destroy
   validates :image, content_type: { in: [ "image/jpeg", "image/png" ], message: "のファイル形式はJPEGまたはPNGにしてください" },
                     size: { less_than: 5.megabytes, message: "のファイルサイズは5MB以下にしてください" }
 
   after_save :process_image_variants, if: -> { image.attached? && image.changed? }
+  before_destroy :purge_image
 
   enum category: {
     "現在" => "現在",
@@ -39,5 +40,9 @@ class WorldGuide < ApplicationRecord
     image.variant(resize_to_limit: [ 1200, 1200 ]).processed
     image.variant(resize_to_limit: [ 800, 800 ]).processed
     image.variant(resize_to_fill: [ 128, 128 ]).processed
+  end
+
+  def purge_image
+    image.purge
   end
 end

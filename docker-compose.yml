@@ -38,6 +38,7 @@ services:
     environment:
       RAILS_ENV: test
       DATABASE_URL: postgres://postgres:password@db:5432/historia_test
+      DOCKER_COMPOSE: 'true'
     env_file:
       - .env
 

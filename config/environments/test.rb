@@ -34,6 +34,12 @@ Rails.application.configure do
   # Store uploaded files on the local file system in a temporary directory.
   config.active_storage.service = :test
 
+  # ★★★ この一行が重要です ★★★
+  # Active Jobのキューアダプタを :inline に設定します。
+  # これにより、Active Storageのファイル削除ジョブが即時実行され、
+  # モデルテストでレコード削除時に画像ファイルも同期的に削除されるようになります。
+  config.active_job.queue_adapter = :inline
+
   # Disable caching for Action Mailer templates even if Action Controller
   # caching is enabled.
   config.action_mailer.perform_caching = false
