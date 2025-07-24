@@ -9,7 +9,9 @@ class WorldGuideFeaturesController < ApplicationController
   end
 
   def update
-    if @world_guide_feature.update(world_guide_feature_params)
+    @world_guide_feature.image.purge if world_guide_feature_params[:remove_image] == "1"
+
+    if @world_guide_feature.update(world_guide_feature_params.except(:remove_image))
       redirect_to story_world_guide_feature_path(@story, @world_guide_feature), notice: "特徴の詳細を更新しました。"
     else
       flash.now[:alert] = "更新に失敗しました。"
@@ -27,6 +29,6 @@ class WorldGuideFeaturesController < ApplicationController
   end
 
   def world_guide_feature_params
-    params.require(:world_guide_feature).permit(:description)
+    params.require(:world_guide_feature).permit(:description, :image, :remove_image)
   end
 end

@@ -12,10 +12,12 @@
         <p class="font-bold">【特徴】</p>
         <p class="text-xl ml-4 mt-2"><%= @world_guide_feature.world_feature_category.name %></p>
       </div>
+      
       <div>
         <p class="font-bold">【説明】</p>
         <p class="text-xl ml-4 mt-2"><%= @world_guide_feature.explanation.presence || "未設定" %></p>
       </div>
+
       <div>
         <p class="font-bold">【詳細説明】</p>
         <div class="ml-4 mt-2">
@@ -25,6 +27,21 @@
             </div>
           <% else %>
             <p class="text-gray-500">詳細説明は未設定です。「特徴を編集する」ボタンより作成ください。</p>
+          <% end %>
+        </div>
+      </div>
+
+      <div>
+        <p class="font-bold">【イメージ画像】</p>
+        <div class="mt-2">
+          <% if @world_guide_feature.image.attached? %>
+            <a href="#" 
+                data-action="click->image-viewer#open" 
+                data-image-viewer-src-param="<%= url_for(@world_guide_feature.image.variant(resize_to_limit: [1200, 1200])) %>">
+              <%= image_tag @world_guide_feature.image.variant(resize_to_limit: [800, 800]), class: "w-full h-auto rounded-lg shadow-md cursor-pointer hover:opacity-80 transition-opacity" %>
+            </a>
+          <% else %>
+            <p class="text-xl ml-4 mt-2">なし</p>
           <% end %>
         </div>
       </div>

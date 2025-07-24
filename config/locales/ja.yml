@@ -41,6 +41,10 @@ ja:
         birthplace_world_guide_id: "出身地"
         address_world_guide_id: "現住所"
         image: "イメージ画像"
+      character_feature:
+        image: "イメージ画像"
+      world_guide_feature:
+        image: "イメージ画像"
 
   activemodel:
     attributes:

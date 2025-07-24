@@ -1,0 +1,12 @@
+<% if f.object.errors.any? %>
+  <div id="error_explanation" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-6" role="alert">
+    <p class="font-bold">
+      <%= f.object.errors.count %>件のエラーがあります。
+    </p>
+    <ul class="mt-2 list-disc list-inside">
+      <% f.object.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

@@ -1,5 +1,4 @@
 <% breadcrumb :character_feature, @story, @character_feature %>
-
 <div class="px-4 sm:px-6 lg:px-8 py-8">
   <div class="max-w-screen-xl mx-auto">
     <h1 class="text-center text-3xl md:text-4xl font-bold tracking-tight mt-12 mb-14">特徴の詳細を確認しよう！</h1>
@@ -26,6 +25,20 @@
             </div>
           <% else %>
             <p class="text-gray-500">詳細説明は未設定です。「特徴を編集する」ボタンより作成ください。</p>
+          <% end %>
+        </div>
+      </div>
+      <div>
+        <p class="font-bold">【イメージ画像】</p>
+        <div class="mt-2">
+          <% if @character_feature.image.attached? %>
+            <a href="#" 
+                data-action="click->image-viewer#open" 
+                data-image-viewer-src-param="<%= url_for(@character_feature.image.variant(resize_to_limit: [1200, 1200])) %>">
+              <%= image_tag @character_feature.image.variant(resize_to_limit: [800, 800]), class: "w-full h-auto rounded-lg shadow-md cursor-pointer hover:opacity-80 transition-opacity" %>
+            </a>
+          <% else %>
+            <p class="text-xl ml-4 mt-2">なし</p>
           <% end %>
         </div>
       </div>

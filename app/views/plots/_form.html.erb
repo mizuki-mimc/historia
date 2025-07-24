@@ -33,17 +33,21 @@
   <div data-controller="plot-template" data-plot-template-templates-value="<%= @plot_templates.to_json(only: [:id, :body]) %>">
     <%= f.label :content, "構成メモ", class: "block text-lg font-bold" %>
     
-    <div class="flex items-center gap-2 mt-1 mb-2">
-      <%= select_tag :plot_template, 
-                     options_from_collection_for_select(@plot_templates, :id, :name), 
-                     prompt: "テンプレートを選択 ※未選択でも可", 
-                     class: "block w-full px-3 py-2 border border-black rounded-md shadow-sm",
-                     data: { plot_template_target: "select" } %>
-      <button type="button" 
-              data-action="click->plot-template#insert"
-              class="py-2 px-4 border border-gray-400 rounded-md font-semibold hover:bg-black hover:text-white transition-colors duration-300 whitespace-nowrap">
-        末尾に挿入
-      </button>
+    <div class="flex flex-col sm:flex-row gap-y-2 sm:gap-x-2 mt-1 mb-2">
+      <div class="w-full sm:w-full">
+        <%= select_tag :plot_template, 
+                       options_from_collection_for_select(@plot_templates, :id, :name), 
+                       prompt: "テンプレートを選択 ※未選択でも可", 
+                       class: "block w-full px-3 py-2 border border-black rounded-md shadow-sm",
+                       data: { plot_template_target: "select" } %>
+      </div>
+      <div class="w-full sm:w-auto">
+        <button type="button" 
+                data-action="click->plot-template#insert"
+                class="w-full py-2 px-4 border border-gray-400 rounded-md font-semibold hover:bg-black hover:text-white transition-colors duration-300 whitespace-nowrap">
+          末尾に挿入
+        </button>
+      </div>
     </div>
 
     <%= f.text_area :content, 
@@ -52,12 +56,12 @@
                     data: { plot_template_target: "textarea" } %>
   </div>
 
-  <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-    <button type="button" disabled class="w-1/2 py-3 px-4 border rounded-md shadow-sm text-lg font-semibold text-gray-500 bg-gray-100">
+  <div class="flex flex-col sm:flex-row items-center justify-center gap-y-4 sm:gap-x-4 pt-4">
+    <button type="button" disabled class="w-full sm:w-full py-3 px-4 border rounded-md shadow-sm text-lg font-semibold text-gray-500 bg-gray-100 min-w-0">
       AIプロットチェック
     </button>
     <% submit_text = plot.new_record? ? "プロットを作成" : "プロットを更新する" %>
-    <%= f.submit submit_text, class: "w-1/2 py-3 px-4 border border-gray-400 rounded-md font-semibold hover:bg-black hover:text-white transition-colors duration-300" %>
+    <%= f.submit submit_text, class: "w-full sm:w-full py-3 px-4 border border-gray-400 rounded-md font-semibold hover:bg-black hover:text-white transition-colors duration-300 min-w-0" %>
   </div>
 
 <% end %>

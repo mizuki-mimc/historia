@@ -4,7 +4,8 @@
     <h1 class="text-center text-3xl md:text-4xl font-bold tracking-tight mt-12 mb-14">特徴を編集しよう！</h1>
 
     <%= form_with model: @character_feature, url: story_character_feature_path(@story, @character_feature), local: true, class: "max-w-3xl mx-auto space-y-6" do |f| %>
-      
+      <%= render 'character_features/forms/error_messages', f: f %>
+
       <div>
         <p class="font-bold">【特徴】</p>
         <p class="text-xl ml-4 mt-2"><%= @character_feature.character_feature_category.name %></p>
@@ -18,6 +19,8 @@
         <%= f.label :description, "【詳細説明】", class: "font-bold" %>
         <%= f.text_area :description, class: "mt-2 block w-full border-2 border-gray-300 rounded-md shadow-sm p-4", rows: 10, placeholder: "この特徴に関するより詳細な設定や背景を記述できます。" %>
       </div>
+
+      <%= render 'character_features/forms/image_upload_section', f: f %>
 
       <div class="flex justify-center space-x-4 pt-4">
         <%= f.submit "特徴を更新する", class: "border border-gray-400 px-6 py-3 rounded-md font-semibold hover:bg-black hover:text-white transition-colors duration-300" %>
