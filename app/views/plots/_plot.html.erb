@@ -2,7 +2,7 @@
   <% if @story.plots.any? %>
     <% @story.plots.order(:order, :created_at).each do |plot| %>
       <div class="border border-black rounded-lg p-6 space-y-4">
-        <div class="flex items-baseline">
+        <div class="flex flex-col sm:flex-row sm:items-baseline">
           <span class="font-bold text-xl mr-2">【<%= plot.chapter %>】</span>
           <span class="font-bold text-xl"><%= plot.title %></span>
         </div>        
@@ -69,17 +69,22 @@
           </div>
         </div>
             
-        <div class="flex justify-end items-center gap-4 mt-12">
-          <%= link_to "編集する", edit_story_plot_path(@story, plot), class: "border border-gray-400 px-8 py-2 rounded-md font-semibold hover:bg-gray-100 transition-colors duration-300" %>
-          <%= link_to "削除する", "#",
-            class: "border border-gray-400 px-8 py-2 rounded-md font-semibold hover:bg-red-500 hover:text-white transition-colors duration-300",
-            data: {
-                  action: "click->modal#open",
-                  modal_url: story_plot_path(@story, plot),
-                  modal_title: "プロットの削除",
-                  modal_body: "「<strong>#{plot.chapter}：#{plot.title}</strong>」を完全に削除します。この操作は元に戻せません。",
-                  modal_button_text: "削除する"
-                } %>
+        <div class="flex flex-col sm:flex-row justify-center sm:justify-end items-center gap-y-6 sm:gap-x-4 mt-12">
+          <div>
+            <%= link_to "編集する", edit_story_plot_path(@story, plot), 
+                        class: "w-full py-2 px-8 border border-gray-400 rounded-md font-semibold hover:bg-gray-100 transition-colors duration-300 text-center whitespace-nowrap" %>
+          </div>
+          <div>
+            <%= link_to "削除する", "#",
+                        class: "w-full py-2 px-8 border border-gray-400 rounded-md font-semibold hover:bg-red-500 hover:text-white transition-colors duration-300 text-center whitespace-nowrap",
+                        data: {
+                            action: "click->modal#open",
+                            modal_url: story_plot_path(@story, plot),
+                            modal_title: "プロットの削除",
+                            modal_body: "「<strong>#{plot.chapter}：#{plot.title}</strong>」を完全に削除します。この操作は元に戻せません。",
+                            modal_button_text: "削除する"
+                          } %>
+          </div>
         </div>
       </div>
     <% end %>
