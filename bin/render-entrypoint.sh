@@ -25,4 +25,7 @@ ruby -r pg -e "
 echo "Running database migrations..."
 bundle exec rails db:migrate
 
+echo "Running database seeds..."
+bundle exec rails db:seed
+
 exec "$@"
