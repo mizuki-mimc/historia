@@ -36,7 +36,7 @@
     <div class="flex items-center gap-2 mt-1 mb-2">
       <%= select_tag :plot_template, 
                      options_from_collection_for_select(@plot_templates, :id, :name), 
-                     prompt: "テンプレートを選択...", 
+                     prompt: "テンプレートを選択 ※未選択でも可", 
                      class: "block w-full px-3 py-2 border border-black rounded-md shadow-sm",
                      data: { plot_template_target: "select" } %>
       <button type="button" 
