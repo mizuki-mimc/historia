@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :plot_template do
-    name { "MyString" }
-    description { "MyText" }
-    body { "MyText" }
+    sequence(:name) { |n| "テストテンプレート#{n}" }
+    sequence(:body) { |n| "これはテストテンプレート#{n}の内容です。\n" }
+    description { nil }
   end
 end
