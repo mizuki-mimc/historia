@@ -54,7 +54,7 @@ jobs:
         run: chmod +x bin/*
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: '20'
       
@@ -115,7 +115,7 @@ jobs:
         run: chmod +x bin/* 
 
       - name: Setup Node.js (for scan_js_audit)
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: '20'
       
