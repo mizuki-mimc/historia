@@ -3,7 +3,8 @@ class StoriesController < ApplicationController
   before_action :set_story, only: [ :show, :set_status, :destroy, :edit, :update ]
 
   def index
-    @stories = current_user.stories.order(updated_at: :desc)
+    @q = current_user.stories.ransack(params[:q])
+    @stories = @q.result(distinct: true).order(updated_at: :desc)
   end
 
   def new

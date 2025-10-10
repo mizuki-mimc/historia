@@ -12,6 +12,8 @@ gem "enum_help"
 
 gem "gretel"
 
+gem "ransack"
+
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 # Use postgresql as the database for Active Record
