@@ -29,10 +29,10 @@ class Story < ApplicationRecord
   validates :synopsis, length: { maximum: 500 }
 
   def self.ransackable_attributes(auth_object = nil)
-    ["title", "thema", "synopsis", "genre", "status", "created_at"]
+    [ "title", "thema", "synopsis", "genre", "status", "created_at" ]
   end
 
   def self.ransackable_associations(auth_object = nil)
-    ["characters", "user", "plots", "world_guides", "flags"] 
+    [ "characters", "user", "plots", "world_guides", "flags" ]
   end
 end
